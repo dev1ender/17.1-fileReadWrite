@@ -1,0 +1,17 @@
+--problem 1
+var datafile = sc.textFile("/user/cloudera/17.1/textfile.txt",2)
+datafile.count
+
+--problem 2
+var datafile = sc.textFile("/user/cloudera/17.1/textfile.txt",2)
+--split the text on  the basis of - and "space" using flat map and the replace special charaters with blank and assigning 1 with every character and then counting the words
+val datasplit = datafile.flatMap(x=>x.split(" ")).map(x=>x.replace(".","")).map(x=>x.replace(",","")).map(x=>(x,1)).count
+
+
+--Problem 3
+--load the file into the spark from hdfs
+var datafile = sc.textFile("/user/cloudera/17.1/SampleDoc.txt",2)
+
+--split the text on  the basis of - and "space" using flat map and the replace special charaters with blank and count the words
+val datasplit = datafile.flatMap(x=>x.split("-")).flatMap(x=>x.split(" ")).map(x=>x.replace(".","")).map(x=>x.replace(",","")).count
+
